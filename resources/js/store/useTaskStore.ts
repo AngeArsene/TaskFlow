@@ -18,6 +18,8 @@ interface TaskState {
 
   addProject: (name: string) => Promise<void>;
   deleteProject: (id: number) => Promise<void>;
+  updateProject: (id: number, name: string) => Promise<void>;
+
 }
 
 type StateProps = Pick<TaskState, 'tasks'|'projects'|'selectedProjectId'>;
@@ -104,6 +106,22 @@ export const useTaskStore: () => TaskState = create<TaskState>((set: (a:Partial<
       console.error('Failed to add project:', e);
     }
   },
+
+  updateProject: async (id: number, name: string) => {
+    try {
+      const { data: upToDateProject } = await
+        api.put(`/projects/${id}`, { name }) as { data: Project };
+
+      const upToDateProjects: Project[] = get().projects.map((project: Project) =>
+        project.id === id ? upToDateProject : project
+      );
+
+      set({ projects: upToDateProjects });
+    } catch (e) {
+      console.error('Failed to update project:', e);
+    }
+  },
+
 
   deleteProject: async (id: number): Promise<void> => {
     try {
