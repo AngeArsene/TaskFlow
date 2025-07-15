@@ -17,7 +17,7 @@ export function TaskItem({ task }: TaskItemProps) {
   const [isDeleting, setIsDeleting] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const { updateTask, deleteTask } = useTaskStore();
+  const { updateTask, deleteTask } = useTaskStore(); // Make sure updateTask supports completed field
 
   const {
     attributes,
@@ -46,6 +46,10 @@ export function TaskItem({ task }: TaskItemProps) {
     setIsEditing(false);
   };
 
+  const handleToggleCompleted = async () => {
+    // await updateTask(task.id, { completed: false }); // ⬅️ Toggle completed
+  };
+
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter') {
       handleUpdate();
@@ -68,9 +72,9 @@ export function TaskItem({ task }: TaskItemProps) {
   };
 
   const formatDate = (dateString: string | null | undefined) => {
-    if (!dateString) return 'N/A'; // handle null or empty string
+    if (!dateString) return 'N/A';
     const date = new Date(dateString);
-    if (isNaN(date.getTime())) return 'Invalid Date'; // handle invalid date string
+    if (isNaN(date.getTime())) return 'Invalid Date';
 
     return new Intl.DateTimeFormat('en-US', {
       month: 'short',
@@ -99,7 +103,8 @@ export function TaskItem({ task }: TaskItemProps) {
         'relative group bg-white rounded-lg shadow-sm border border-gray-200 p-4 mb-3',
         'hover:shadow-md transition-all duration-200 ease-in-out',
         isDragging ? 'z-10 shadow-md bg-blue-50' : '',
-        task.priority <= 3 ? 'border-l-4' : ''
+        task.priority <= 3 ? 'border-l-4' : '',
+        false ? 'opacity-50 line-through' : '' // ⬅️ style for completed tasks
       )}
       style={{
         ...style,
@@ -115,11 +120,11 @@ export function TaskItem({ task }: TaskItemProps) {
       }}
     >
       <div className="flex items-center">
+        {/* Drag handle */}
         <div
           {...attributes}
           {...listeners}
-          className="mr-3 cursor-grab flex items-center justify-center w-6 h-6 text-gray-400
-                     hover:text-gray-600 active:cursor-grabbing"
+          className="mr-3 cursor-grab flex items-center justify-center w-6 h-6 text-gray-400 hover:text-gray-600 active:cursor-grabbing"
         >
           <svg
             width="16"
@@ -135,6 +140,16 @@ export function TaskItem({ task }: TaskItemProps) {
           </svg>
         </div>
 
+        {/* ✅ Completed checkbox */}
+        <input
+          type="checkbox"
+          checked={false}
+          onChange={handleToggleCompleted}
+          className="mr-3 accent-green-500"
+          title="Mark as completed"
+        />
+
+        {/* Task Content */}
         <div className="flex-1">
           {isEditing ? (
             <div className="flex items-center">
@@ -220,3 +235,4 @@ export function TaskItem({ task }: TaskItemProps) {
     </motion.div>
   );
 }
+
