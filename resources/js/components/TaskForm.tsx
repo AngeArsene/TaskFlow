@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 import { PlusCircle } from 'lucide-react';
 import { useTaskStore } from '../store/useTaskStore';
 
-
 export function TaskForm() {
   const [taskName, setTaskName] = useState('');
   const [isExpanded, setIsExpanded] = useState(false);
@@ -29,16 +28,17 @@ export function TaskForm() {
             onChange={(e) => setTaskName(e.target.value)}
             onFocus={() => setIsExpanded(true)}
             placeholder="Add a new task..."
-            className="w-full py-3 px-4 pr-12 bg-white border border-gray-300 rounded-lg shadow-sm
-                     focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent
-                     transition-all duration-200"
+            className="w-full py-3 px-4 pr-12 bg-gray-700 border border-gray-600 rounded-lg shadow-sm
+                       text-gray-100 placeholder-gray-400
+                       focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent
+                       transition-all duration-200"
           />
           <motion.button
             type="submit"
             whileTap={{ scale: 0.95 }}
             disabled={!taskName.trim() || !selectedProjectId}
-            className="absolute right-3 top-1/2 transform -translate-y-1/2 text-blue-500
-                     hover:text-blue-600 disabled:text-gray-300 transition-colors"
+            className="absolute right-3 top-1/2 transform -translate-y-1/2 text-blue-400
+                       hover:text-blue-300 disabled:text-gray-500 transition-colors"
           >
             <PlusCircle size={24} />
           </motion.button>
@@ -52,14 +52,15 @@ export function TaskForm() {
             className="mt-3"
           >
             <div className="mb-3">
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label className="block text-sm font-medium text-gray-300 mb-1">
                 Select Project
               </label>
               <select
                 value={selectedProjectId}
                 onChange={(e) => setSelectedProjectId(Number(e.target.value))}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none
-                         focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg 
+                           text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500 
+                           focus:border-transparent"
                 required
               >
                 <option value="">Choose a project</option>
@@ -72,15 +73,15 @@ export function TaskForm() {
             </div>
 
             <div className="flex items-center justify-between">
-              <p className="text-sm text-gray-500">
+              <p className="text-sm text-gray-400">
                 New tasks are automatically set to highest priority (#1)
               </p>
               <div className="flex space-x-2">
                 <button
                   type="button"
                   onClick={() => setIsExpanded(false)}
-                  className="px-4 py-2 text-sm text-gray-600 bg-gray-100 hover:bg-gray-200 rounded-lg
-                         transition-colors"
+                  className="px-4 py-2 text-sm text-gray-300 bg-gray-600 hover:bg-gray-500 rounded-lg
+                             transition-colors"
                 >
                   Cancel
                 </button>
@@ -88,7 +89,7 @@ export function TaskForm() {
                   type="submit"
                   disabled={!taskName.trim() || !selectedProjectId}
                   className="px-4 py-2 text-sm text-white bg-blue-500 hover:bg-blue-600 rounded-lg
-                         disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200"
+                             disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200"
                 >
                   Add Task
                 </button>

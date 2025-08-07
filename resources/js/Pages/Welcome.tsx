@@ -10,6 +10,7 @@ import { PageProps, Task, Project } from '@/types/index';
 import { ProjectManager } from '../components/ProjectManager';
 import { ProjectSelector } from '../components/ProjectSelector';
 
+<<<<<<< HEAD
 type Tasks = {
   tasks: Task[],
   projects: Project[],
@@ -17,6 +18,14 @@ type Tasks = {
 };
 
 const App: React.FC = () => {
+=======
+function App() {
+  type Tasks = {
+    tasks: Task[],
+    projects: Project[],
+    selectedProject: number | null
+  };
+>>>>>>> feature/task-completion
 
   const {
     selectedProject,
@@ -32,26 +41,23 @@ const App: React.FC = () => {
     setSelectedProject,
   } = useTaskStore();
 
-  // Load backend-provided data into the store on mount
   useEffect(() => {
     setTasks(initialTasks);
     setProjects(initialProjects);
     setSelectedProject(selectedProject);
-
   }, [initialTasks, initialProjects, selectedProject, setTasks, setProjects, setSelectedProject]);
-
 
   const filteredTasks = selectedProjectId
     ? tasks.filter((task: Task) => task.projectId === selectedProjectId)
     : tasks;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 to-gray-800">
       <div className="container mx-auto max-w-3xl px-4 py-8">
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          className="bg-white rounded-xl shadow-sm px-6 py-8"
+          className="bg-gray-800 rounded-xl shadow-xl border border-gray-700 px-6 py-8"
         >
           <AppHeader />
 
@@ -68,13 +74,13 @@ const App: React.FC = () => {
                 exit={{ opacity: 0 }}
               >
                 <div className="flex items-center justify-between mb-4">
-                  <h2 className="text-xl font-semibold text-gray-800">Your Tasks</h2>
-                  <div className="text-sm text-gray-500">
+                  <h2 className="text-xl font-semibold text-gray-100">Your Tasks</h2>
+                  <div className="text-sm text-gray-400">
                     {filteredTasks.length} {filteredTasks.length === 1 ? 'task' : 'tasks'}
                   </div>
                 </div>
 
-                <p className="text-sm text-gray-600 mb-4">
+                <p className="text-sm text-gray-300 mb-4">
                   Drag and drop to reorder tasks. Priority will update automatically.
                 </p>
 
@@ -93,7 +99,7 @@ const App: React.FC = () => {
           </AnimatePresence>
         </motion.div>
 
-        <footer className="mt-8 text-center text-sm text-gray-500">
+        <footer className="mt-8 text-center text-sm text-gray-400">
           <p>© {new Date().getFullYear()} TaskFlow App • Drag and drop powered by dnd-kit</p>
         </footer>
       </div>

@@ -49,10 +49,10 @@ export function TaskList({ tasks }: TaskListProps) {
 
     const reordered: Task[] = arrayMove(tasks, oldIndex, newIndex);
 
-    // Update priorities in the reordered array
-    const withUpdatedPriorities = reordered.map((task: Task, index: number) => ({
-        ...task,
-        priority: index + 1
+    // Update priorities
+    const withUpdatedPriorities = reordered.map((task, index) => ({
+      ...task,
+      priority: index + 1,
     }));
 
     reorderTasks(withUpdatedPriorities);
@@ -66,7 +66,7 @@ export function TaskList({ tasks }: TaskListProps) {
     >
       <motion.div layout className="mt-6 space-y-3">
         <SortableContext
-          items={tasks.map(task => String(task.id))} // dnd-kit expects string IDs
+          items={tasks.map(task => String(task.id))}
           strategy={verticalListSortingStrategy}
         >
           {tasks.length > 0 ? (
@@ -77,7 +77,7 @@ export function TaskList({ tasks }: TaskListProps) {
               />
             ))
           ) : (
-            <div className="py-8 text-center text-gray-500">
+            <div className="py-8 text-center text-gray-400">
               <p>No tasks yet. Add your first task above!</p>
             </div>
           )}
