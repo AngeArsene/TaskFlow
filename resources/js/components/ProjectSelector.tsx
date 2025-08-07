@@ -6,11 +6,12 @@ export function ProjectSelector() {
   const {
     projects, 
     selectedProjectId, 
-    setSelectedProject } = useTaskStore();
+    setSelectedProject 
+  } = useTaskStore();
 
   return (
     <div className="mb-6">
-      <label className="block text-sm font-medium text-gray-700 mb-2">
+      <label className="block text-sm font-medium text-gray-300 mb-2">
         Filter by Project
       </label>
       <div className="flex gap-2 flex-wrap">
@@ -20,8 +21,8 @@ export function ProjectSelector() {
           onClick={() => setSelectedProject(null)}
           className={`px-3 py-1.5 rounded-full text-sm font-medium transition-colors
             ${!selectedProjectId
-              ? 'bg-gray-900 text-white'
-              : 'bg-gray-100 text-gray-600 hover:bg-gray-200'}`}
+              ? 'bg-gray-100 text-gray-900'
+              : 'bg-gray-600 text-gray-300 hover:bg-gray-500'}`}
         >
           All Projects
         </motion.button>
@@ -34,7 +35,7 @@ export function ProjectSelector() {
             className={`px-3 py-1.5 rounded-full text-sm font-medium transition-colors
               ${selectedProjectId === project.id
                 ? 'text-white'
-                : 'bg-gray-100 text-gray-600 hover:bg-gray-200'}`}
+                : 'bg-gray-600 text-gray-300 hover:bg-gray-500'}`}
             style={{
               backgroundColor: selectedProjectId === project.id ? project.color : undefined,
             }}

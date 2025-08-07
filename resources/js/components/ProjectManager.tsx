@@ -37,13 +37,13 @@ export function ProjectManager() {
   };
 
   return (
-    <div className="mb-8 bg-gray-50 rounded-lg p-4">
+    <div className="mb-8 bg-gray-800 rounded-lg p-4 border border-gray-700">
       <div className="flex items-center justify-between mb-4">
-        <h3 className="text-lg font-semibold text-gray-900">Projects</h3>
+        <h3 className="text-lg font-semibold text-gray-100">Projects</h3>
         {!isAdding && (
           <button
             onClick={() => setIsAdding(true)}
-            className="flex items-center gap-1 text-sm text-blue-600 hover:text-blue-700"
+            className="flex items-center gap-1 text-sm text-blue-400 hover:text-blue-300"
           >
             <Plus size={16} />
             Add Project
@@ -66,23 +66,23 @@ export function ProjectManager() {
                 value={newProjectName}
                 onChange={(e) => setNewProjectName(e.target.value)}
                 placeholder="Project name"
-                className="flex-1 px-3 py-1.5 text-sm border border-gray-300 rounded-lg
-                         focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="flex-1 px-3 py-1.5 text-sm bg-gray-900 border border-gray-700 rounded-lg text-gray-100
+                           placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 autoFocus
               />
               <button
                 type="submit"
                 disabled={!newProjectName.trim()}
-                className="px-3 py-1.5 text-sm text-white bg-blue-500 rounded-lg
-                         hover:bg-blue-600 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="px-3 py-1.5 text-sm text-white bg-blue-600 rounded-lg
+                         hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 Add
               </button>
               <button
                 type="button"
                 onClick={() => setIsAdding(false)}
-                className="px-3 py-1.5 text-sm text-gray-600 bg-gray-200 rounded-lg
-                         hover:bg-gray-300"
+                className="px-3 py-1.5 text-sm text-gray-200 bg-gray-700 rounded-lg
+                         hover:bg-gray-600"
               >
                 Cancel
               </button>
@@ -95,8 +95,8 @@ export function ProjectManager() {
             <motion.div
               key={project.id}
               layout
-              className="flex items-center justify-between p-2 bg-white rounded-lg
-                       border border-gray-200 group"
+              className="flex items-center justify-between p-2 bg-gray-700 rounded-lg
+                         border border-gray-600 group"
             >
               <div className="flex items-center gap-2 flex-1">
                 <div
@@ -112,11 +112,11 @@ export function ProjectManager() {
                       if (e.key === 'Enter') saveEdit();
                       if (e.key === 'Escape') cancelEdit();
                     }}
-                    className="flex-1 px-2 py-1 text-sm border border-gray-300 rounded focus:ring-2 focus:ring-blue-500"
+                    className="flex-1 px-2 py-1 text-sm bg-gray-800 text-gray-100 border border-gray-600 rounded focus:ring-2 focus:ring-blue-500"
                     autoFocus
                   />
                 ) : (
-                  <span className="text-sm font-medium text-gray-900">
+                  <span className="text-sm font-medium text-gray-100">
                     {project.name}
                   </span>
                 )}
@@ -126,14 +126,14 @@ export function ProjectManager() {
                   <>
                     <button
                       onClick={saveEdit}
-                      className="p-1 text-green-600 hover:text-green-700"
+                      className="p-1 text-green-400 hover:text-green-300"
                       title="Save"
                     >
                       <Check size={16} />
                     </button>
                     <button
                       onClick={cancelEdit}
-                      className="p-1 text-red-600 hover:text-red-700"
+                      className="p-1 text-red-500 hover:text-red-400"
                       title="Cancel"
                     >
                       <X size={16} />
@@ -143,14 +143,14 @@ export function ProjectManager() {
                   <>
                     <button
                       onClick={() => startEdit(project.id, project.name)}
-                      className="p-1 text-gray-500 hover:text-blue-600"
+                      className="p-1 text-gray-400 hover:text-blue-400"
                       title="Edit project"
                     >
                       <Edit2 size={14} />
                     </button>
                     <button
                       onClick={() => deleteProject(project.id)}
-                      className="p-1 text-gray-500 hover:text-red-600"
+                      className="p-1 text-gray-400 hover:text-red-500"
                       title="Delete project"
                     >
                       <Trash2 size={14} />

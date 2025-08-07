@@ -19,8 +19,8 @@ export function AppHeader() {
           <ClipboardList size={32} />
         </motion.div>
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">TaskFlow</h1>
-          <p className="text-sm text-gray-600">Manage your tasks with ease</p>
+          <h1 className="text-2xl font-bold text-gray-100">TaskFlow</h1>
+          <p className="text-sm text-gray-300">Manage your tasks with ease</p>
         </div>
       </div>
     </motion.header>

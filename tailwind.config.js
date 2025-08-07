@@ -14,7 +14,16 @@ export default {
     theme: {
         extend: {
             fontFamily: {
-                sans: ['Figtree', ...defaultTheme.fontFamily.sans],
+                sans: ['Inter', 'ui-sans-serif', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+            },
+            animation: {
+                'bounce-slow': 'bounce 3s infinite',
+            },
+            boxShadow: {
+                'task': '0 2px 4px rgba(0, 0, 0, 0.05), 0 1px 2px rgba(0, 0, 0, 0.1)',
+            },
+            transitionProperty: {
+                'height': 'height',
             },
         },
     },
