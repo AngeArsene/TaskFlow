@@ -10,22 +10,12 @@ import { PageProps, Task, Project } from '@/types/index';
 import { ProjectManager } from '../components/ProjectManager';
 import { ProjectSelector } from '../components/ProjectSelector';
 
-<<<<<<< HEAD
-type Tasks = {
-  tasks: Task[],
-  projects: Project[],
-  selectedProject: number|null
-};
-
-const App: React.FC = () => {
-=======
 function App() {
   type Tasks = {
     tasks: Task[],
     projects: Project[],
     selectedProject: number | null
   };
->>>>>>> feature/task-completion
 
   const {
     selectedProject,

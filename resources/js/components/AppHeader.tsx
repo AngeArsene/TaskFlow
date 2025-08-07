@@ -4,14 +4,14 @@ import { motion } from 'framer-motion';
 
 export function AppHeader() {
   return (
-    <motion.header
+    <motion.header 
       className="mb-8"
       initial={{ opacity: 0, y: -20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.3 }}
     >
       <div className="flex items-center">
-        <motion.div
+        <motion.div 
           className="mr-3 text-blue-500"
           whileHover={{ rotate: 5, scale: 1.1 }}
           transition={{ type: "spring", stiffness: 400, damping: 10 }}
