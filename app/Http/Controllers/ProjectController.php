@@ -18,7 +18,6 @@ use Illuminate\Http\JsonResponse;
  */
 class ProjectController extends Controller
 {
-
     /**
      * Store a newly created project in storage.
      *
@@ -30,7 +29,7 @@ class ProjectController extends Controller
         $request->validate(['name' => 'required|string']);
         $project = Project::create($request->only('name'));
 
-        return response()->json(self::formate($project)); // ✅ required for frontend update
+        return response()->json(Project::formate($project)); // ✅ required for frontend update
     }
 
     /**
@@ -45,7 +44,7 @@ class ProjectController extends Controller
         $request->validate(['name' => 'required|string']);
         $project->update($request->only('name'));   // ✅ required for frontend update
 
-        return response()->json(self::formate($project)); // ✅ required for frontend update
+        return response()->json(Project::formate($project)); // ✅ required for frontend update
     }
 
     /**
