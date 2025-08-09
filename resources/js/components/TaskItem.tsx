@@ -6,6 +6,7 @@ import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 import clsx from 'clsx';
 import { useTaskStore } from '../store/useTaskStore';
+import { log } from 'console';
 
 export interface TaskItemProps {
   task: Task;
@@ -50,7 +51,8 @@ export function TaskItem({ task }: TaskItemProps) {
     await updateTask(task.id, {
       ...task,
       completed: !task.completed,
-      completedAt: !task.completed ? new Date().toISOString() : null,
+      completedAt: !task.completed ?
+        new Date().toISOString().slice(0, 19).replace('T', ' ') : null,
     });
   };
 
