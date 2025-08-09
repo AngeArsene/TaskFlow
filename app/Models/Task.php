@@ -25,7 +25,7 @@ class Task extends Model
      *
      * @var array
      */
-    protected $fillable = ['name', 'priority', 'project_id'];
+    protected $fillable = ['name', 'priority', 'completed', 'project_id'];
 
     /**
      * Get the project that owns the task.
@@ -46,5 +46,23 @@ class Task extends Model
     public static function highestPriority(int $project_id): ?int
     {
         return self::where('project_id', $project_id)->max('priority');
+    }
+
+    /**
+     * Format the task data for frontend.
+     *
+     * @param \App\Models\Task $task
+     * @return array
+     */
+    public static function formate (Task $task): array
+    {
+        return [
+            'id'        => $task->id,
+            'name'      => $task->name,
+            'priority'  => $task->priority,
+            'projectId' => $task->project_id,
+            'createdAt' => $task->created_at,
+            'updatedAt' => $task->updated_at,
+        ];
     }
 }

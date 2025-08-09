@@ -29,9 +29,9 @@ class TaskController extends Controller
      */
     public function index(Request $request): Response
     {
-        $projects = Project::all()->map(fn ($project) => ProjectController::formate($project));
+        $projects = Project::all()->map(fn ($project) => Project::formate($project));
 
-        $tasks = Task::orderBy('priority')->get()->map(fn ($task) => self::formate($task));
+        $tasks = Task::orderBy('priority')->get()->map(fn ($task) => Task::formate($task));
 
         return Inertia::render(
             'Welcome',
@@ -62,7 +62,7 @@ class TaskController extends Controller
             'project_id' => $request->project_id,
         ]);
 
-        return response()->json(self::formate($task));
+        return response()->json(Task::formate($task));
     }
 
     /**
@@ -77,7 +77,7 @@ class TaskController extends Controller
         $request->validate(['name' => 'required|string']);
         $task->update($request->only('name'));
 
-        return response()->json(self::formate($task));
+        return response()->json(Task::formate($task));
     }
 
     /**
@@ -106,23 +106,5 @@ class TaskController extends Controller
         }
 
         return response()->json(['status' => 'ok']);
-    }
-
-    /**
-     * Format the task data for frontend.
-     *
-     * @param \App\Models\Task $task
-     * @return array
-     */
-    private static function formate (Task $task): array
-    {
-        return [
-            'id'        => $task->id,
-            'name'      => $task->name,
-            'priority'  => $task->priority,
-            'projectId' => $task->project_id,
-            'createdAt' => $task->created_at,
-            'updatedAt' => $task->updated_at,
-        ];
     }
 }

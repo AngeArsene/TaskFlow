@@ -8,7 +8,9 @@ export interface Task {
   id: string;
   name: string;
   priority: number;
+  completed?: boolean;
   projectId: string;
   createdAt: string;
   updatedAt: string;
+  completedAt?: string;
 }
