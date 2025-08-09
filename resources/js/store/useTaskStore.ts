@@ -54,8 +54,10 @@ export const useTaskStore: () => TaskState = create<TaskState>((set: (a:Partial<
 
   updateTask: async (id: number, name: string | Task): Promise<void> => {
     try {
+      const data = typeof name !== 'string' ? name : { name };
+
       const { data: upToDateTask } = await
-        api.put(`/tasks/${id}`, { name }) as { data: Task };
+        api.put(`/tasks/${id}`, data) as { data: Task };
 
       const updatedTasks: Task[] = get().tasks.map((task: Task) =>
         task.id === id ? upToDateTask : task

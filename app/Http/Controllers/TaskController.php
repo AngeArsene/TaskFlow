@@ -74,8 +74,12 @@ class TaskController extends Controller
      */
     public function update(Request $request, Task $task)
     {
-        $request->validate(['name' => 'required|string']);
-        $task->update($request->only('name'));
+        $request->validate([
+            'name' => 'required|string',
+            'completed' => 'nullable|boolean',
+            'completedAt' => 'nullable|string|date',
+        ]);
+        $task->update($request->only(['name', 'completed', 'completedAt']));
 
         return response()->json(Task::formate($task));
     }
