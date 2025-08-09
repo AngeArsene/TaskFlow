@@ -23,7 +23,9 @@ export interface Task {
     id: number;
     name: string;
     priority: number;
+    completed: boolean | null;
     projectId: number;
     createdAt: string;
     updatedAt: string;
+    completedAt: string | null;
 }

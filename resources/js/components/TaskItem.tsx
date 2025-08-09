@@ -91,7 +91,18 @@ export function TaskItem({ task }: TaskItemProps) {
   return (
     <motion.div
       ref={setNodeRef}
-      style={style}
+      style={{
+        ...style,
+        borderLeftColor:
+          task.priority === 1
+            ? '#EF4444'
+            : task.priority === 2
+            ? '#F97316'
+            : task.priority === 3
+            ? '#3B82F6'
+            : 'transparent',
+        borderLeftWidth: task.priority <= 3 ? '4px' : '1px',
+      }}
       layout
       initial={{ opacity: 0, y: 20 }}
       animate={{
@@ -108,18 +119,6 @@ export function TaskItem({ task }: TaskItemProps) {
         isDragging && 'z-10 shadow-md bg-gray-600',
         task.priority <= 3 ? 'border-l-4' : ''
       )}
-      style={{
-        ...style,
-        borderLeftColor:
-          task.priority === 1
-            ? '#EF4444'
-            : task.priority === 2
-            ? '#F97316'
-            : task.priority === 3
-            ? '#3B82F6'
-            : 'transparent',
-        borderLeftWidth: task.priority <= 3 ? '4px' : '1px',
-      }}
     >
       <div className="flex items-center">
         {/* ✅ Toggle Complete Button */}

@@ -12,7 +12,7 @@ interface TaskState {
   setSelectedProject: (id: number | null) => void;
 
   addTask: (name: string, projectId: number) => Promise<void>;
-  updateTask: (id: number, name: string) => Promise<void>;
+  updateTask: (id: number, name: string | Task) => Promise<void>;
   deleteTask: (id: number) => Promise<void>;
   reorderTasks: (tasks: Task[]) => Promise<void>;
 
@@ -52,7 +52,7 @@ export const useTaskStore: () => TaskState = create<TaskState>((set: (a:Partial<
     }
   },
 
-  updateTask: async (id: number, name: string): Promise<void> => {
+  updateTask: async (id: number, name: string | Task): Promise<void> => {
     try {
       const { data: upToDateTask } = await
         api.put(`/tasks/${id}`, { name }) as { data: Task };

@@ -57,12 +57,14 @@ class Task extends Model
     public static function formate (Task $task): array
     {
         return [
-            'id'        => $task->id,
-            'name'      => $task->name,
-            'priority'  => $task->priority,
-            'projectId' => $task->project_id,
-            'createdAt' => $task->created_at,
-            'updatedAt' => $task->updated_at,
+            'id'          => $task->id,
+            'name'        => $task->name,
+            'priority'    => $task->priority,
+            'completed'   => $task->completed,
+            'projectId'   => $task->project_id,
+            'createdAt'   => $task->created_at,
+            'updatedAt'   => $task->updated_at,
+            'completedAt' => $task->completed_at,
         ];
     }
 }
